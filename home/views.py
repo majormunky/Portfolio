@@ -6,7 +6,7 @@ def index(request):
 
 
 def project(request, slug):
-    template_name = "home/{}.html".format(slug)
+    template_name = "home/projects/{}.html".format(slug)
     return render(request, template_name, {})
 
 
