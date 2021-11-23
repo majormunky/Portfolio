@@ -26,6 +26,9 @@ def create_post(request):
             user=request.user
         )
         new_post.save()
+
+        messages.add_message(request, messages.INFO, "Blog Post Added")
+        
         return JsonResponse({"result": "success"})
     else:
         return render(request, "dashboard/create-post.html", {})
