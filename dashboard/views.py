@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from blog import models as blog_models
 
@@ -18,7 +18,7 @@ def create_post(request):
         content = request.POST.get("content", None)
         if not all([title, content]):
             return JsonResponse({"result": "failed"})
-
+        
         new_post = blog_models.BlogPost(
             title=title,
             content=content,
@@ -30,3 +30,7 @@ def create_post(request):
         return render(request, "dashboard/create-post.html", {})
 
 
+def edit_post(request, pk):
+    blog_data = get_object_or_404(blog_models.BlogPost, pk=pk)
+    blog_dict = {"title": blog_data.title, "content": blog_data.content}
+    return render(request, "dashboard/edit-post.html", {"blog_data": blog_dict})

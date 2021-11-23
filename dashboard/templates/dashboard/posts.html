@@ -20,7 +20,7 @@
 		  <tbody class="align-middle">
 			{% for blog in blog_list %}
 			<tr>
-			  <td><a href="#" class="btn btn-primary btn-sm">Edit</a></td>
+			  <td><a href="{% url 'dashboard-edit-post' blog.id %}" class="btn btn-primary btn-sm">Edit</a></td>
 			  <td>{{blog.title}}</td>
 			  <td>{{blog.created_at}}</td>
 			  <td>{{blog.updated_at}}</td>
