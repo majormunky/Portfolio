@@ -5,7 +5,34 @@
 {% block content %}
 <div class="row">
   <div class="col-sm-12">
-	<h1>Posts</h1>
+	<div class="card">
+	  <div class="card-header bg-primary text-white fw-bold">
+	 	Blog Posts ({{blog_list|length}})
+	  </div>
+	  <div class="card-body">
+	 	<table class="table table-striped">
+		  <thead>
+			<th>&nbsp;</th>
+			<th>Title</th>
+			<th>Created</th>
+			<th>Last Updated</th>
+		  </thead>
+		  <tbody class="align-middle">
+			{% for blog in blog_list %}
+			<tr>
+			  <td><a href="#" class="btn btn-primary btn-sm">Edit</a></td>
+			  <td>{{blog.title}}</td>
+			  <td>{{blog.created_at}}</td>
+			  <td>{{blog.updated_at}}</td>
+			</tr>
+			{% endfor %}
+		  </tbody>
+		</table>
+	  </div>
+	  <div class="card-footer">
+	 	<a href="#" class="btn btn-outline-primary btn-sm">New Post</a>
+	  </div>
+	</div>
   </div>
 </div>
 {% endblock %}

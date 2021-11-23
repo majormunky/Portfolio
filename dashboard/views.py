@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from blog import models as blog_models
 
 
 def index(request):
@@ -6,5 +7,6 @@ def index(request):
 
 
 def posts(request):
-    return render(request, "dashboard/posts.html", {})
+    blog_list = blog_models.BlogPost.objects.all().order_by("created_at")
+    return render(request, "dashboard/posts.html", {"blog_list": blog_list})
 
