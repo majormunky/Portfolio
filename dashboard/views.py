@@ -32,5 +32,17 @@ def create_post(request):
 
 def edit_post(request, pk):
     blog_data = get_object_or_404(blog_models.BlogPost, pk=pk)
+    if request.is_ajax() and request.method == "POST":
+        title = request.POST.get("title", None)
+        content = request.POST.get("content", None)
+        if not all([title, content]):
+            return JsonResponse({"result": "failed"})
+
+        blog_data.title = title
+        blog_data.content = content
+        blog_data.save()
+
+        return JsonResponse({"result": "success"})
+    
     blog_dict = {"title": blog_data.title, "content": blog_data.content}
     return render(request, "dashboard/edit-post.html", {"blog_data": blog_dict})
