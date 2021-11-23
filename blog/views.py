@@ -9,7 +9,12 @@ def index(request):
 
 
 def blog_detail(request, year, month, slug):
-    pass
+    blog_data = models.BlogPost.objects.filter(
+        slug=slug,
+        created_at__year=year,
+        created_at__month=month
+    ).first()
+    return render(request, "blog/view-blog-post.html", {"blog_data": blog_data})
 
 
 @login_required
