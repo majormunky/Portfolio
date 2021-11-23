@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
+from django.contrib import messages
 from blog import models as blog_models
 
 
@@ -41,6 +42,8 @@ def edit_post(request, pk):
         blog_data.title = title
         blog_data.content = content
         blog_data.save()
+
+        messages.add_message(request, messages.INFO, 'Blog post saved!')
 
         return JsonResponse({"result": "success"})
     
