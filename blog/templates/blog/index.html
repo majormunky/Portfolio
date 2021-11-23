@@ -5,20 +5,12 @@
     <h1>Blog</h1>
     <div class="row mb-4">
         <div class="col-12">
-            <div class="mb-3 bg-light ps-2 py-2">
-                <a href="#" class="mb-2 text-decoration-none">This is a blog post title</a>
-                <p class="text-muted">Posted: July 29th, 2021</p>
-            </div>
-
-            <div class="mb-3 bg-light ps-2 py-2">
-                <a href="#" class="mb-2 text-decoration-none">This is a blog post title 2</a>
-                <p class="text-muted">Posted: July 29th, 2021</p>
-            </div>
-
-            <div class="mb-3 bg-light ps-2 py-2">
-                <a href="#" class="mb-2 text-decoration-none">This is a blog post title 3</a>
-                <p class="text-muted">Posted: July 29th, 2021</p>
-            </div>
+            {% for blog in blog_list %}
+                <div class="mb-3 bg-light ps-2 py-2">
+                    <a href="{{ blog.get_absolute_url }}" class="mb-2 text-decoration-none">{{blog.title}}</a>
+                    <p class="text-muted">Posted: {{blog.created_at}}</p>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>
