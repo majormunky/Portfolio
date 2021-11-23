@@ -1,11 +1,12 @@
 {% extends "dashboard-base.html" %}
+{% load static %}
 
 {% block page_name %}New Blog Post{% endblock %}
 
 {% block content %}
 <div class="row">
   <div class="col-sm-12">
-	<div class="card">
+	<div class="card mb-3">
 	  <div class="card-header bg-primary text-white fw-bold">
 	 	Create Post
 	  </div>
@@ -17,14 +18,11 @@
 		<div class="mb-3">
 		  <label class="form-label">Content</label>
 		  <div id="editor">
-			<p>Hello World!</p>
-			<p>Some initial <strong>bold</strong> text</p>
-			<p><br></p>
 		  </div>
 		</div>
 	  </div>
 	  <div class="card-footer">
-	 	<a href="#" class="btn btn-outline-primary btn-sm">Save</a>
+	 	<button id="save-button" class="btn btn-outline-primary btn-sm">Save</button>
 	  </div>
 	</div>
   </div>
@@ -33,8 +31,11 @@
 
 {% block page_scripts %}
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="{% static 'js/ajax.js' %}"></script>
 <script>
-  var toolbarOptions = [
+  const csrfToken = "{{csrf_token}}";
+  
+  let toolbarOptions = [
 	  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
 	  ['blockquote', 'code-block'],
 	  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
@@ -46,7 +47,7 @@
 	  ['clean']
   ];
   
-  var quill = new Quill('#editor', {
+  let quill = new Quill('#editor', {
       theme: 'snow',
 	  formats: [
 		  "bold",
@@ -65,9 +66,25 @@
 		  toolbar: toolbarOptions,
 	  }
   });
+
+  const save_button = document.getElementById("save-button");
+  save_button.addEventListener("click", async (event) => {
+	  const data = {
+		  title: document.getElementById("blog-title").value,
+		  content: quill.getContents()
+	  }
+	  const saveUrl = ".";
+	  const result = await postData(saveUrl, csrfToken, data);
+	  console.log(result);
+  });
 </script>
 {% endblock %}
 
 {% block page_styles %}
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<style>
+  #editor {
+	  min-height: 500px;
+  }
+</style>
 {% endblock %}

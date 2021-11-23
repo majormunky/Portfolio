@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from blog import models as blog_models
 
 
@@ -12,5 +13,20 @@ def posts(request):
 
 
 def create_post(request):
-    return render(request, "dashboard/create-post.html", {})
+    if request.is_ajax() and request.method == "POST":
+        title = request.POST.get("title", None)
+        content = request.POST.get("content", None)
+        if not all([title, content]):
+            return JsonResponse({"result": "failed"})
+
+        new_post = blog_models.BlogPost(
+            title=title,
+            content=content,
+            user=request.user
+        )
+        new_post.save()
+        return JsonResponse({"result": "success"})
+    else:
+        return render(request, "dashboard/create-post.html", {})
+
 
