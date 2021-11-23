@@ -10,7 +10,14 @@
 	 	Edit
 	  </div>
 	  <div class="card-body">
-	 	<div id="editor"></div>
+		<div class="mb-3">
+		  <label class="form-label">Title</label>
+		  <input type="text" class="form-control" id="blog-title" value="{{blog_data.title}}">
+		</div>
+		<div class="mb-3">
+		  <label class="form-label">Content</label>
+	 	  <div id="editor"></div>
+		</div>
 	  </div>
 	  <div class="card-footer">
 	 	<button class="btn btn-outline-primary btn-sm" id="save-button">Save</button>
