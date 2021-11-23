@@ -1,18 +1,22 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from blog import models as blog_models
 
 
+@login_required
 def index(request):
     return render(request, "dashboard/index.html", {})
 
 
+@login_required
 def posts(request):
     blog_list = blog_models.BlogPost.objects.all().order_by("-created_at")
     return render(request, "dashboard/posts.html", {"blog_list": blog_list})
 
 
+@login_required
 def create_post(request):
     if request.is_ajax() and request.method == "POST":
         title = request.POST.get("title", None)
@@ -34,6 +38,7 @@ def create_post(request):
         return render(request, "dashboard/create-post.html", {})
 
 
+@login_required
 def edit_post(request, pk):
     blog_data = get_object_or_404(blog_models.BlogPost, pk=pk)
     if request.is_ajax() and request.method == "POST":
