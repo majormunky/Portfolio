@@ -1,7 +1,13 @@
 asgiref==3.4.1
+bleach==4.1.0
 Django==3.2.5
+django-summernote==0.8.20.0
 django-taggit==1.5.1
 gunicorn==20.1.0
+packaging==21.3
+pyparsing==3.0.6
 python-dotenv==0.18.0
 pytz==2021.1
+six==1.16.0
 sqlparse==0.4.1
+webencodings==0.5.1
