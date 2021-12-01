@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "core",
     "blog",
     "dashboard",
+    "taggit",
 ]
 
 MIDDLEWARE = [
