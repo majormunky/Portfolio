@@ -41,18 +41,18 @@
 
   const save_button = document.getElementById("save-button");
   save_button.addEventListener("click", async (event) => {
-  	const blogContent = "";
+  	const blogContent = CKEDITOR.instances.editor.getData();
 
 	  const data = {
 		  title: document.getElementById("blog-title").value,
 		  content: blogContent
 	  };
-	  console.log(data);
-	  // const saveUrl = ".";
-	  // const response = await postData(saveUrl, csrfToken, data);
-	  // if (response.result == "success") {
-		 //  window.location.href = "/dashboard/posts/";
-	  // }
+	  
+	  const saveUrl = ".";
+	  const response = await postData(saveUrl, csrfToken, data);
+	  if (response.result == "success") {
+		  window.location.href = "/dashboard/posts/";
+	  }
   });
 </script>
 {% endblock %}
