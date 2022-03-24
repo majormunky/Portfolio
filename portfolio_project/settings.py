@@ -83,8 +83,12 @@ WSGI_APPLICATION = "portfolio_project.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "portfolio_db",
+        "USER": os.environ.get("DJANGO_DB_USER"),
+        "PASSWORD": os.environ.get("DJANGO_DB_PASS"),
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
@@ -129,8 +133,8 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = ((BASE_DIR / "static"),)
 # STATIC_ROOT = BASE_DIR / "static"
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
